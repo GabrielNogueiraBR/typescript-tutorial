@@ -1,14 +1,18 @@
 "use strict";
-const anchor = document.querySelector('a');
-const form = document.querySelector('form');
-const formAlias = document.querySelector('.new-item-form');
-// inputs
-const type = document.querySelector('#type');
-const toFrom = document.querySelector('#tofrom');
-const details = document.querySelector('#details');
-const amount = document.querySelector('#amount');
-formAlias.addEventListener('submit', (e) => {
-    e.preventDefault(); // prevent page to refresh on submit event
-    console.log(type.value, toFrom.value, details.value, amount.value, amount.valueAsNumber //transform string to number
-    );
-});
+class Invoice {
+    constructor(c, d, a) {
+        this.client = c;
+        this.details = d;
+        this.amount = a;
+    }
+    format() {
+        return `${this.client} owes ${this.amount} for ${this.details}`;
+    }
+}
+const invOne = new Invoice('Gabriel', 'work on R2U', 999999999);
+const invTwo = new Invoice('João', 'work on Amazon', 10000);
+// Just Invoice Objects
+let invoices = [];
+// invoices.push('hello');
+invoices.push(invOne);
+invoices.push(invTwo);

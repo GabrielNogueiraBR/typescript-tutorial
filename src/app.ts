@@ -1,14 +1,23 @@
-// Example 1
-let greet: (a: string, b: string) => void;
+const anchor = document.querySelector('a')!;
 
-greet = (name: string, greeting: string) => {
-    console.log(`${name} says ${greeting}`);
-}
+const form = document.querySelector('form')!;
 
-console.log(greet('Gabriel','hello'));
+const formAlias = document.querySelector('.new-item-form') as HTMLFormElement;
 
-// Example 2
-let cal: (a: number, b: number, c:string) => number;
+// inputs
+const type = document.querySelector('#type') as HTMLSelectElement;
+const toFrom = document.querySelector('#tofrom') as HTMLInputElement;
+const details = document.querySelector('#details') as HTMLInputElement;
+const amount = document.querySelector('#amount') as HTMLInputElement;
 
-// Example 3
-let logDetails: (obj: {name: string, age: number}) => void;
+formAlias.addEventListener('submit',(e:Event)=>{
+    e.preventDefault(); // prevent page to refresh on submit event
+
+    console.log(
+            type.value,
+            toFrom.value,
+            details.value,
+            amount.value,
+            amount.valueAsNumber //transform string to number
+        );
+})

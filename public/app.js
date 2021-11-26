@@ -19,3 +19,18 @@ formAlias.addEventListener('submit', (e) => {
         doc = new Payment(toFrom.value, details.value, amount.valueAsNumber);
     list.render(doc, type.value, 'end');
 });
+// Generics
+const addUID = (obj) => {
+    let uid = Math.floor(Math.random() * 100);
+    return Object.assign(Object.assign({}, obj), { uid });
+};
+const docOne = {
+    uid: 1,
+    resourceName: 'person',
+    data: { name: 'mario' }
+};
+const docTwo = {
+    uid: 2,
+    resourceName: 'list',
+    data: ['milk', 'bread', 'egg']
+};

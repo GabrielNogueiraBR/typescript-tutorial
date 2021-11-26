@@ -1,31 +1,40 @@
-// Interface
-interface IsPerson{
-    name: string;
-    age: number;
-    speak(a: string): void;
-    spend(a: number): number;
-}
+import { Invoice } from "./classes/Invoice.js";
+import { Payment } from "./classes/Payment.js";
+import { HasFormatter } from "./interfaces/HasFormatter.js";
 
-const me: IsPerson = {
-    name: 'shaun',
-    age: 30,
-    speak(text: string): void {
-        console.log(text);
-    },
-    spend(amount: number): number {
-        console.log('I spent', amount);
-        return amount;
-    },
-};
+let docOne: HasFormatter;
+let docTwo: HasFormatter;
 
-const greetPerson = (person: IsPerson)=>{
-    console.log(`Hello ${person.name}`);
-}
+docOne = new Invoice('Yoshi','web work',2500);
+docTwo = new Payment('Mario','plumbing work',200);
 
-greetPerson(me);
-
-
-import { Invoice } from "./classes/Invoice";
+// Array with specific type
+let docs: HasFormatter[] = [];
+// docOne and docTwo implements the interface
+docs.push(docOne);
+docs.push(docTwo);
 
 const invOne = new Invoice('Gabriel','work on R2U',999999999);
 const invTwo = new Invoice('João','work on Amazon',10000);
+
+const formAlias = document.querySelector('.new-item-form') as HTMLFormElement;
+
+// Inputs
+const type = document.querySelector('#type') as HTMLSelectElement;
+const toFrom = document.querySelector('#tofrom') as HTMLInputElement;
+const details = document.querySelector('#details') as HTMLInputElement;
+const amount = document.querySelector('#amount') as HTMLInputElement;
+
+formAlias.addEventListener('submit', (e) => {
+    e.preventDefault(); // prevent page to refresh on submit event
+    
+    let doc: HasFormatter;
+
+    if(type.value === 'invoice')
+        doc = new Invoice(toFrom.value,details.value,amount.valueAsNumber);
+    else
+        doc = new Payment(toFrom.value,details.value,amount.valueAsNumber);
+
+    console.log(doc)
+
+});

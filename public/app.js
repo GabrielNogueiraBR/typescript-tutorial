@@ -12,11 +12,13 @@ const ul = document.querySelector('ul');
 const list = new ListTemplate(ul);
 formAlias.addEventListener('submit', (e) => {
     e.preventDefault(); // prevent page to refresh on submit event
+    let values;
+    values = [toFrom.value, details.value, amount.valueAsNumber];
     let doc;
     if (type.value === 'invoice')
-        doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber);
+        doc = new Invoice(...values);
     else
-        doc = new Payment(toFrom.value, details.value, amount.valueAsNumber);
+        doc = new Payment(...values);
     list.render(doc, type.value, 'end');
 });
 // Generics
@@ -43,3 +45,13 @@ const docTwo = {
     resourceType: ResourceType.BOOK,
     data: { title: 'Name of the Wind' }
 };
+// TUPLES
+let arr = ['ryu', 25, true];
+arr[0] = false;
+arr[1] = 'yoshi';
+arr = [30, false, 'yoshi'];
+let tupple;
+tupple = ['ryu', 25, true];
+//tupple = [25,'ryu',true]; // errado
+let student;
+student = ['Gabriel', 0943875];

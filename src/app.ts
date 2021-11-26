@@ -19,12 +19,15 @@ const list = new ListTemplate(ul);
 formAlias.addEventListener('submit', (e) => {
     e.preventDefault(); // prevent page to refresh on submit event
     
+    let values : [string,string,number];
+    values = [toFrom.value,details.value,amount.valueAsNumber];
+
     let doc: HasFormatter;
 
     if(type.value === 'invoice')
-        doc = new Invoice(toFrom.value,details.value,amount.valueAsNumber);
+        doc = new Invoice(...values);
     else
-        doc = new Payment(toFrom.value,details.value,amount.valueAsNumber);
+        doc = new Payment(...values);
 
     list.render(doc,type.value,'end');
 
@@ -63,3 +66,16 @@ const docTwo : Resource<object> = {
     resourceType: ResourceType.BOOK, 
     data: {title: 'Name of the Wind'}
 }
+
+// TUPLES
+let arr = ['ryu', 25, true];
+arr[0] = false;
+arr[1] = 'yoshi';
+arr = [30, false, 'yoshi'];
+
+let tupple: [string, number, boolean];
+tupple = ['ryu',25,true];
+//tupple = [25,'ryu',true]; // errado
+
+let student: [string,number];
+student = ['Gabriel',0943875];
